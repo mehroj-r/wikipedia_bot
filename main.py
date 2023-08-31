@@ -24,22 +24,17 @@ async def command_start_handler(message: Message) -> None:
     """
     This handler receives messages with `/start` command
     """
-    # Most event objects have aliases for API methods that can be called in events' context
-    # For example if you want to answer to incoming message you can use `message.answer(...)` alias
-    # and the target chat will be passed to :ref:`aiogram.methods.send_message.SendMessage`
-    # method automatically or call API method directly via
-    # Bot instance: `bot.send_message(chat_id=message.chat.id, ...)`
     await message.reply(f"Hello, {hbold(message.from_user.full_name)}! \nWelcome to Wikipedia Bot. Send any text message to get information about.")
 
 
 @dp.message()
 async def wiki_handler(message: types.Message) -> None:
     try:
+        # Send a response from Wikipedia
         wiki_response = wikipedia.summary(message.text)
-        # Send a copy of the received message
         await message.answer(wiki_response)     
     except:
-        # But not all the types is supported to be copied so need to handle it
+        # But not all the inputs are supported
         await message.answer("No wikipedia page was found for this request !!!")
 
 
