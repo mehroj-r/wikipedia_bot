@@ -1,19 +1,16 @@
 import asyncio
 import logging
 import sys
-import wikipedia
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 from aiogram.utils.markdown import hbold
-
-# Defining Wikipedia Language
-wikipedia.set_lang("en")
+from wiki_api import wiki_response
 
 # Bot token can be obtained via https://t.me/BotFather
-TOKEN = "6583942031:AAFg210_atreTpKav8wRxRE84kt3ReKWVsE"
+TOKEN = "BOT_TOKEN"
 
 # All handlers should be attached to the Router (or Dispatcher)
 dp = Dispatcher()
@@ -30,9 +27,9 @@ async def command_start_handler(message: Message) -> None:
 @dp.message()
 async def wiki_handler(message: types.Message) -> None:
     try:
-        # Send a response from Wikipedia
-        wiki_response = wikipedia.summary(message.text)
-        await message.answer(wiki_response)     
+        # Send a response from Wikipedia API
+        response = wiki_response(message.text)
+        await message.answer(response)
     except:
         # But not all the inputs are supported
         await message.answer("No wikipedia page was found for this request !!!")
