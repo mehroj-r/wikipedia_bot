@@ -26,6 +26,7 @@ def wiki_response(search_keyword):
     for page_id in page_ids:
         if response_data[page_id]['index'] == 1:
             result = response_data[page_id]['extract']
+            result_page = wiki_page(response_data[page_id]['pageid'])
             break
     
     sentences_list = result.split('.')
@@ -35,5 +36,12 @@ def wiki_response(search_keyword):
     result = '.'.join(sentences_list)
 
     result = result + '.'
+
+    result = result + f'\n\n💬 Read more in official <a href="{result_page}">Wikipedia page</a> ...'
+
+    return result
+
+def wiki_page(search_keyword):
+    result = f"https://en.wikipedia.org/w/index.php?curid={search_keyword}"
 
     return result
