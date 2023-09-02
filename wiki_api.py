@@ -27,5 +27,13 @@ def wiki_response(search_keyword):
         if response_data[page_id]['index'] == 1:
             result = response_data[page_id]['extract']
             break
+    
+    sentences_list = result.split('.')
+
+    sentences_list = sentences_list[:10]
+
+    result = '.'.join(sentences_list)
+
+    result = result + '.'
 
     return result
