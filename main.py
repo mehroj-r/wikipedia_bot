@@ -46,7 +46,7 @@ async def wiki_handler(message: types.Message) -> None:
             response = cut_long_message(response)
 
         await message.answer(response)
-    except TypeError:
+    except:
         # But not all the inputs are supported
         await message.answer("No wikipedia page was found for this request !!!")
 

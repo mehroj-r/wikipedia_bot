@@ -33,11 +33,7 @@ def wiki_response(search_keyword):
 
     sentences_list = sentences_list[:10]
 
-    result = '.'.join(sentences_list)
-
-    result = result + '.'
-
-    result = result + f'\n\n💬 Read more in official <a href="{result_page}">Wikipedia page</a> ...'
+    result = f"<b>{response_data[page_id]['title']}</b>" + "\n\n" + '.'.join(sentences_list) + '.' + f'\n\n💬 Read more in official <a href="{result_page}">Wikipedia page</a> ...'
 
     return result
 
